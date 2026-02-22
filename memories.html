@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Memories 💕</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="mem-page">
+
+  <div class="mem-container">
+
+    <h1 class="mem-title fade-in">🎀 Our Memories 🎀</h1>
+
+    <!-- مشغل اليوتيوب -->
+    <div class="video-box fade-in">
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/0aQDSas7-Ng"
+          frameborder="0"
+          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <!-- الصور -->
+    <img src="photo1.jpg" class="mem-photo fade-in" id="photo" onclick="changePhoto()">
+
+    <!-- العداد -->
+    <div class="counter ar fade-in" id="counter"></div>
+
+  </div>
+
+  <!-- زرار ثابت فوق كل حاجة -->
+  <button class="next-btn-fixed" onclick="goFinal()">Next 💕</button>
+
+  <script src="script.js"></script>
+</body>
+</html>
