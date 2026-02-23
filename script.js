@@ -1,167 +1,103 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>هديتي ليك 💖</title>
+// ===== باسورد =====
+function checkPass() {
+  const pass = document.getElementById("pass");
+  if (!pass) return;
 
-<style>
-/* ===== نفس ستايلك تقريباً ===== */
-body{
-    font-family:Segoe UI;
-    background:linear-gradient(145deg,#ffdde1,#ee9ca7);
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    overflow:hidden;
+  if (pass.value === "2652006") {
+    window.location.href = "rose.html";
+  } else {
+    pass.classList.add("shake");
+    setTimeout(() => pass.classList.remove("shake"), 400);
+    alert("مش عارف تاريخ ميلادك 😡");
+  }
 }
 
-.card{
-    background:rgba(255,255,255,.7);
-    padding:25px;
-    border-radius:30px;
-    text-align:center;
-    width:100%;
-    max-width:450px;
-}
+// ===== قلوب الخلفية (أخف للموبايل) =====
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.innerHTML = "💖";
+  heart.className = "heart";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 14 + 14 + "px";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 3500);
+}, 600); // كان 300 → خففناه
 
-input,button{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border:none;
-    border-radius:50px;
-    font-size:18px;
-}
+// ===== صفحة الوردة =====
+function showLove() {
+  ["♥️","🫶🏻","😍"].forEach((emoji, i) => {
+    setTimeout(() => {
+      const e = document.createElement("div");
+      e.textContent = emoji;
+      e.style.position = "absolute";
+      e.style.bottom = "0";
+      e.style.left = Math.random() * 100 + "vw";
+      e.style.fontSize = "36px";
+      e.style.animation = "floatUp 3s linear forwards";
+      document.body.appendChild(e);
+      setTimeout(()=>e.remove(),3000);
+    }, i * 250);
+  });
 
-button{
-    background:#ff4da6;
-    color:white;
-    cursor:pointer;
-}
+  const note = document.getElementById("note");
+  if (note) note.style.display = "block";
+setTimeout(()=> note.classList.add("show"), 50);
 
-#counter{
-    margin:15px 0;
-    font-weight:bold;
-}
-
-.hidden{display:none;}
-
-.heart{
-    position:fixed;
-    bottom:-20px;
-    animation:floatUp 4s linear forwards;
-    pointer-events:none;
-}
-
-@keyframes floatUp{
-    to{transform:translateY(-120vh);opacity:0;}
-}
-
-.shake{animation:shake .3s;}
-@keyframes shake{
-0%,100%{transform:translateX(0)}
-25%{transform:translateX(-5px)}
-75%{transform:translateX(5px)}
-}
-</style>
-</head>
-
-<body>
-
-<!-- ===== صفحة الباسورد ===== -->
-<div class="card" id="page-login">
-    <h2>ادخل تاريخ الميلاد 💖</h2>
-    <input id="pass" placeholder="اكتب هنا">
-    <button onclick="checkPass()">دخول</button>
-</div>
-
-<!-- ===== صفحة الوردة ===== -->
-<div class="card hidden" id="page-love">
-    <h2>🌹 مفاجأة!</h2>
-    <button onclick="showLove()">اضغط هنا</button>
-    <p id="note" class="hidden">أنت أحلى حاجة حصلت 💕</p>
-    <button onclick="goNext()">التالي</button>
-</div>
-
-<!-- ===== صفحة الذكريات ===== -->
-<div class="card hidden" id="page-memory">
-    <h2>ذكرياتنا 💗</h2>
-    <img id="photo" src="photo1.jpg" style="width:100%;border-radius:20px;">
-    <button onclick="changePhoto()">غير الصورة</button>
-    <div id="counter"></div>
-</div>
-
-<script>
-/* ===== إدارة الصفحات ===== */
-function showPage(id){
-    document.querySelectorAll(".card").forEach(c=>c.classList.add("hidden"));
-    document.getElementById(id).classList.remove("hidden");
-}
-
-/* ===== القلوب ===== */
-setInterval(()=>{
-    const h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML=["💖","💗","💕"][Math.floor(Math.random()*3)];
-    h.style.left=Math.random()*100+"vw";
-    h.style.fontSize=(20+Math.random()*20)+"px";
-    document.body.appendChild(h);
-    setTimeout(()=>h.remove(),4000);
-},900);
-
-/* ===== الباسورد ===== */
-function checkPass(){
-    const pass=document.getElementById("pass");
-    if(pass.value==="2652006"){
-        showPage("page-love");
-    }else{
-        pass.classList.add("shake");
-        setTimeout(()=>pass.classList.remove("shake"),300);
-        alert("مش عارفة تاريخ ميلادك 😡");
-    }
-}
-
-/* ===== صفحة الحب ===== */
-function showLove(){
-    document.getElementById("note").classList.remove("hidden");
 }
 
 function goNext(){
-    showPage("page-memory");
+  window.location.href = "memories.html";
 }
 
-/* ===== الصور ===== */
-let photos=["photo1.jpg","photo2.jpg","photo3.jpg"];
-let index=0;
+// ===== صفحة الذكريات =====
+let photos = ["photo1.jpg", "photo2.jpg", "photo3.jpg"];
+let index = 0;
 
 function changePhoto(){
-    index=(index+1)%photos.length;
-    document.getElementById("photo").src=photos[index];
+  const img = document.getElementById("photo");
+  if (!img) return;
+
+  index = (index + 1) % photos.length;
+  img.classList.remove("photo-animate");
+  void img.offsetWidth; // reset animation
+  img.src = photos[index];
+  img.classList.add("photo-animate");
+
+  spawnHeart();
 }
 
-/* ===== العداد ===== */
-const startDate=new Date("2023-10-10T12:56:00");
-
-function updateCounter(){
-    const counter=document.getElementById("counter");
-    if(!counter) return;
-
-    const diff=new Date()-startDate;
-
-    const d=Math.floor(diff/86400000);
-    const h=Math.floor(diff/3600000)%24;
-    const m=Math.floor(diff/60000)%60;
-    const s=Math.floor(diff/1000)%60;
-
-    counter.innerHTML=`💗 مع بعض بقالنا ${d} يوم ${h} ساعة ${m} دقيقة ${s} ثانية`;
+// قلب مع كل صورة
+function spawnHeart(){
+  const h = document.createElement("div");
+  h.textContent = "💗";
+  h.style.position = "absolute";
+  h.style.left = "50%";
+  h.style.bottom = "30%";
+  h.style.transform = "translateX(-50%)";
+  h.style.fontSize = "28px";
+  h.style.animation = "floatUp 2s ease forwards";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),2000);
 }
 
-setInterval(updateCounter,1000);
-updateCounter();
-</script>
+// ===== العداد =====
+const startDate = new Date("2023-10-09T19:20:00");
 
-</body>
-</html>
+setInterval(() => {
+  const counter = document.getElementById("counter");
+  if (!counter) return;
+
+  const now = new Date();
+  const diff = Math.max(0, now - startDate);
+
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff / (1000*60*60)) % 24);
+  const minutes = Math.floor((diff / (1000*60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  counter.innerHTML = `💗 مع بعض بقالنا ${days} يوم ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
+}, 1000);
+
+function goFinal(){
+  window.location.href = "final.html";
+}
