@@ -1,41 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Memories 💕</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Memories 💕</title>
+<link rel="stylesheet" href="style.css">
 </head>
 
 <body class="mem-page">
 
-  <div class="mem-container">
+<div class="mem-container">
 
-    <h1 class="mem-title fade-in">🎀 Our Memories 🎀</h1>
+  <h1 class="mem-title fade-in">🎀 Our Memories 🎀</h1>
 
-    <!-- مشغل اليوتيوب -->
-    <div class="video-box fade-in">
-      <div class="video-wrapper">
-        <iframe
-          src="https://www.youtube.com/embed/0aQDSas7-Ng"
-          frameborder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen>
-        </iframe>
-      </div>
+  <!-- فيديو يوتيوب -->
+  <div class="video-box fade-in">
+    <div class="video-wrapper">
+      <iframe
+        src="https://www.youtube.com/embed/1dA54xlnbJs"
+        frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
     </div>
-
-    <!-- الصور -->
-    <img src="photo1.jpg" class="mem-photo fade-in" id="photo" onclick="changePhoto()">
-
-    <!-- العداد -->
-    <div class="counter ar fade-in" id="counter"></div>
-
   </div>
 
-  <!-- زرار ثابت فوق كل حاجة -->
-  <button class="next-btn-fixed" onclick="goFinal()">Next 💕</button>
+  <!-- الصور -->
+  <img src="photo1.jpg"
+       class="mem-photo fade-in"
+       id="photo"
+       onclick="changePhoto()">
 
-  <script src="script.js"></script>
+  <!-- العداد -->
+  <div class="counter ar fade-in" id="counter"></div>
+
+</div>
+
+<!-- زرار التالي -->
+<button class="next-btn-fixed" onclick="goFinal()">Next 💕</button>
+
+<script>
+/* ===== الصور ===== */
+let photos = [
+  "photo1.jpg",
+  "photo2.jpg",
+  "photo3.jpg",
+  "photo4.jpg"
+]; // زوّد صور براحتك هنا
+
+let index = 0;
+
+function changePhoto(){
+  const img = document.getElementById("photo");
+  if (!img) return;
+
+  index = (index + 1) % photos.length;
+  img.classList.remove("photo-animate");
+  void img.offsetWidth; // reset animation
+  img.src = photos[index];
+  img.classList.add("photo-animate");
+
+  spawnHeart();
+}
+
+/* قلب مع كل صورة */
+function spawnHeart(){
+  const h = document.createElement("div");
+  h.textContent = "💗";
+  h.style.position = "absolute";
+  h.style.left = "50%";
+  h.style.bottom = "30%";
+  h.style.transform = "translateX(-50%)";
+  h.style.fontSize = "28px";
+  h.style.animation = "floatUp 2s ease forwards";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),2000);
+}
+
+/* ===== العداد ===== */
+const startDate = new Date("2023-10-09T19:20:00");
+
+setInterval(() => {
+  const counter = document.getElementById("counter");
+  if (!counter) return;
+
+  const now = new Date();
+  const diff = Math.max(0, now - startDate);
+
+  const days = Math.floor(diff / (1000*60*60*24));
+  const hours = Math.floor((diff / (1000*60*60)) % 24);
+  const minutes = Math.floor((diff / (1000*60)) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
+
+  counter.innerHTML =
+  `💗 مع بعض بقالنا ${days} يوم ${hours} ساعة ${minutes} دقيقة ${seconds} ثانية`;
+}, 1000);
+
+/* ===== انتقال للصفحة الأخيرة ===== */
+function goFinal(){
+  window.location.href = "final.html";
+}
+</script>
+
 </body>
 </html>
