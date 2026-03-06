@@ -3,7 +3,7 @@ function checkPass() {
   const pass = document.getElementById("pass");
   if (!pass) return;
 
-  if (pass.value === "2652006") {
+  if (pass.value === "10112006") {
     window.location.href = "rose.html";
   } else {
     pass.classList.add("shake");
@@ -50,7 +50,7 @@ function goNext(){
 }
 
 // ===== صفحة الذكريات =====
-let photos = ["photo1.jpg", "photo2.jpg", "photo3.jpg"];
+let photos = ["photo1.jpg", "photo2.jpg", "photo3.jpg", "photo4.jpg"];
 let index = 0;
 
 function changePhoto(){
@@ -81,7 +81,7 @@ function spawnHeart(){
 }
 
 // ===== العداد =====
-const startDate = new Date("2023-10-09T19:20:00");
+const startDate = new Date("2023-11-09T19:20:00");
 
 setInterval(() => {
   const counter = document.getElementById("counter");
