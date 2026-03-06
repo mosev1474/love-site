@@ -3,7 +3,7 @@ function checkPass() {
   const pass = document.getElementById("pass");
   if (!pass) return;
 
-  if (pass.value === "10112006") {
+  if (pass.value === "2652006") {
     window.location.href = "rose.html";
   } else {
     pass.classList.add("shake");
